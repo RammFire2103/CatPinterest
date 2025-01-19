@@ -1,0 +1,31 @@
+.cats {
+  display: grid;
+  padding: 48px 62px;
+
+  grid-template-columns: repeat(5, 1fr);
+  gap: 48px;
+}
+
+@media screen and (width <= 1024px) {
+  .cats {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media screen and (width <= 768px) {
+  .cats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (width <= 576px) {
+  .cats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (width <= 445px) {
+  .cats {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

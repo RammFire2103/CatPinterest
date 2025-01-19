@@ -1,52 +1,70 @@
-import { useEffect, useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+// import { useEffect } from "react";
+
 import "./App.css";
+import { Routes, Route, Link, useLocation } from "react-router-dom";
+
+import AllCats from "./pages/AllCats/AllCats";
+import Favorites from "./pages/Favorites/Favorites";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { getFavoriteFromLocalStorage } from "./store/ImageSlice";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [isMainPage, changePage] = useState<boolean>(true);
+  const dispatch = useDispatch();
+
+  const location = useLocation();
 
   useEffect(() => {
-    const headers = {
-      "Content-Type": "application/json",
-      "x-api-key":
-        "live_WMUlasLBp0g0tkkGwiT07cmiqI1vQx85ATQ9PG7QFDVIxr5XURG6cbtwfXlmhjd7",
-    };
-
-    const requestOptions = {
-      method: "GET",
-      headers: headers,
-      // redirect: "follow",
-    };
-
-    fetch("https://api.thecatapi.com/v1/images/search?limit=10", requestOptions)
-      .then((response) => response.json())
-      .then((result) => console.log(result))
-      .catch((error) => console.log("error", error));
+    dispatch(
+      getFavoriteFromLocalStorage(
+        JSON.parse(localStorage.getItem("cats") || "[]")
+      )
+    );
   }, []);
+
+  useEffect(() => {
+    if (location.pathname === "/") {
+      changePage(true);
+    } else {
+      changePage(false);
+    }
+  }, [location]);
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <header>
+        <ul className="navigation">
+          <li>
+            <button
+              className={
+                isMainPage
+                  ? "button navigation__button navigation__button_active-page"
+                  : "button navigation__button"
+              }
+            >
+              <Link to="/">Все котики</Link>
+            </button>
+          </li>
+          <li>
+            <button
+              className={
+                isMainPage
+                  ? "button navigation__button"
+                  : "button navigation__button navigation__button_active-page"
+              }
+            >
+              <Link to="/favorite">
+                <p>Любимые котики</p>
+              </Link>
+            </button>
+          </li>
+        </ul>
+      </header>
+      <Routes>
+        <Route path="/" element={<AllCats />} />
+        <Route path="/favorite" element={<Favorites />} />
+      </Routes>
     </>
   );
 }

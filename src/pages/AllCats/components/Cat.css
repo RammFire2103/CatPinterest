@@ -1,0 +1,48 @@
+.card {
+  position: relative;
+  max-width: 320px;
+  aspect-ratio: 1 / 1;
+  width: 100%; /* Используем 100%, чтобы избежать ошибок с размерами */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden; /* Скрывает избыточный контент при увеличении */
+  margin: 0; /* Убираем все отступы */
+}
+
+.card:hover {
+  transform: scale(1.05); /* Увеличение карточки при наведении */
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+  transform-origin: center center; /* Центрируем увеличение */
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.like-button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.like-button:focus {
+  border: none;
+  outline: none;
+}
+
+.heart-icon {
+  width: 24px;
+  height: 24px;
+  transition: fill 0.3s ease;
+}
+
+.heart-icon:hover {
+  transition: 0.2s ease;
+  fill: #f24e1e;
+}

@@ -36,6 +36,7 @@ function AllCats() {
 
   useEffect(() => {
     if (isBottom) {
+      window.scrollBy(0, 71);
       const headers = {
         "Content-Type": "application/json",
         "x-api-key":
@@ -82,7 +83,11 @@ function AllCats() {
         ))}
       </div>
 
-      {isBottom ? <div>... загружаем ещё котиков ...</div> : <></>}
+      {isBottom ? (
+        <div className="more-cats">... загружаем ещё котиков ...</div>
+      ) : (
+        <></>
+      )}
     </>
   );
 }

@@ -1,6 +1,6 @@
 .cats {
   display: grid;
-  padding: 48px 62px;
+  padding: 48px 62px 48px;
 
   grid-template-columns: repeat(5, 1fr);
   gap: 48px;
@@ -8,6 +8,14 @@
   max-width: 1920px;
   box-sizing: border-box;
   margin: 0 auto;
+}
+
+.more-cats {
+  width: auto;
+  padding: 0 62px 31px;
+  margin: 0 auto;
+
+  text-align: center;
 }
 
 @media screen and (width <= 1024px) {

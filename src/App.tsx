@@ -1,18 +1,16 @@
-// import { useEffect } from "react";
-
 import "./App.css";
 import { Routes, Route, Link, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
 import AllCats from "./pages/AllCats/AllCats";
 import Favorites from "./pages/Favorites/Favorites";
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 import { getFavoriteFromLocalStorage } from "./store/ImageSlice";
 
 function App() {
   const [isMainPage, changePage] = useState<boolean>(true);
-  const dispatch = useDispatch();
 
+  const dispatch = useDispatch();
   const location = useLocation();
 
   useEffect(() => {
@@ -21,7 +19,7 @@ function App() {
         JSON.parse(localStorage.getItem("cats") || "[]")
       )
     );
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (location.pathname === "/") {

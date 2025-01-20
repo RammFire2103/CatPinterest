@@ -1,6 +1,5 @@
 import "./Cat.css";
 
-// import kitty from "../../../assets/image 1.png";
 import Heart from "./Heart";
 import { Image, toggleLike } from "../../../store/ImageSlice";
 import { useDispatch, useSelector } from "react-redux";

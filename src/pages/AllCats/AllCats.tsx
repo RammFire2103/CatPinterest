@@ -76,12 +76,7 @@ function AllCats() {
 
   return (
     <>
-      <div
-        className="cats"
-        onClick={() => {
-          console.log(isBottom);
-        }}
-      >
+      <div className="cats">
         {images.map((image) => (
           <Cat cat={image} key={image.id}></Cat>
         ))}

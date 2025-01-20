@@ -15,13 +15,11 @@ function Favorites() {
   );
 
   useEffect(() => {
-    console.log(2);
     dispatch(
       getFavoriteFromLocalStorage(
         JSON.parse(localStorage.getItem("cats") || "[]")
       )
     );
-    console.log(Favorite);
   }, [dispatch]);
 
   useEffect(() => {

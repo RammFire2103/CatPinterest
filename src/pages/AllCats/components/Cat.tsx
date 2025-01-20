@@ -5,10 +5,12 @@ import Heart from "./Heart";
 import { Image, toggleLike } from "../../../store/ImageSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 function Cat(props: { cat: Image }) {
   const dispatch = useDispatch();
+  const img = useRef<HTMLButtonElement | null>(null);
+
   const isLiked =
     useSelector(
       (state: RootState) =>
@@ -31,9 +33,25 @@ function Cat(props: { cat: Image }) {
   };
 
   return (
-    <div className="card">
+    <div
+      className="card"
+      onMouseOver={() => {
+        if (!isLiked) {
+          img.current?.classList.remove("hide");
+        }
+      }}
+      onMouseOut={() => {
+        if (!isLiked) {
+          img.current?.classList.add("hide");
+        }
+      }}
+    >
       <img className="card-image" src={props.cat.path}></img>
-      <button className="like-button" onClick={handleLike}>
+      <button
+        ref={img}
+        className={isLiked ? "like-button" : "like-button hide"}
+        onClick={handleLike}
+      >
         <Heart isLiked={isLiked} />
       </button>
     </div>

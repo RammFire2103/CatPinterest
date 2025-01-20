@@ -46,3 +46,13 @@
   transition: 0.2s ease;
   fill: #f24e1e;
 }
+
+.hide {
+  opacity: 0;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .hide {
+    opacity: 1;
+  }
+}
